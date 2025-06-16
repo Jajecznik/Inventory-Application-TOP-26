@@ -1,0 +1,27 @@
+article {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.game-card {
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 20px;
+	border-radius: 12px;
+	transition: box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.game-card header h2 {
+	font-size: 1.4rem;
+	margin-bottom: 10px;
+}
+
+.game-card .game-details p {
+	margin: 6px 0;
+	line-height: 1.4;
+}

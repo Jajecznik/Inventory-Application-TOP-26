@@ -1,0 +1,63 @@
+<% if (locals.categories && locals.categories.length> 0) { %>
+  <div class="background-overlay">
+    <div class="overlay-content">
+
+      <!-- Close Button -->
+      <button type="button" class="close-button" aria-label="Close form" onclick="window.location.href='/'">✖</button>
+
+      <!-- Form Container -->
+      <div class="new-game-form">
+        <h2>Add New Game</h2>
+
+        <form action="/create/game" method="POST">
+          <!-- Title -->
+          <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+          </div>
+
+          <!-- Price -->
+          <div class="form-group">
+            <label for="price">Price ($):</label>
+            <input type="number" id="price" name="price" step="0.01" min="0" required>
+          </div>
+
+          <!-- Rating -->
+          <div class="form-group">
+            <label for="rating">Rating (0-10):</label>
+            <input type="number" id="rating" name="rating" step="0.1" min="0" max="10" required>
+          </div>
+
+          <!-- Release Date -->
+          <div class="form-group">
+            <label for="release_date">Release Date:</label>
+            <input type="date" id="release_date" name="release_date" required>
+          </div>
+
+          <!-- Category -->
+          <div class="form-group">
+            <label for="category_id">Category:</label>
+            <select name="category_id" id="category_id" required>
+              <% locals.categories.forEach(category=> { %>
+                <option value="<%= category.id %>">
+                  <%= category.category %>
+                </option>
+                <% }) %>
+            </select>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-actions">
+            <button type="submit" class="submit-button">➕ Add Game</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <% } %>

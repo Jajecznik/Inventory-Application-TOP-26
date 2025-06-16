@@ -1,0 +1,41 @@
+<% if (locals.games && locals.games.length> 0) { %>
+  <div class="games-list">
+    <% games.forEach(game=> { %>
+      <article class="game-card">
+        <div>
+          <header>
+            <h2>
+              <%= game.title %>
+            </h2>
+          </header>
+
+          <section class="game-details">
+            <p><strong>Description:</strong>
+              <%= game.description %>
+            </p>
+            <p><strong>Price:</strong> $<%= game.price %>
+            </p>
+            <p><strong>Rating:</strong>
+              <%= game.rating %>/10
+            </p>
+            <p><strong>Release Date:</strong>
+              <%= game.release_date.toISOString().split('T')[0] %>
+            </p>
+          </section>
+        </div>
+
+        <footer class="edit-delete-buttons">
+          <a href="/?updateGame=true&gameId=<%= encodeURIComponent(game.id) %>" style="display: inline;">
+            <button type="submit" aria-label="Edit game: <%= game.title %>">✏️</button>
+          </a>
+
+          <form action="/delete/game/<%= encodeURIComponent(game.id) %>" method="POST" style="display: inline;">
+            <button type="submit" aria-label="Delete game: <%= game.title %>">🗑️</button>
+          </form>
+        </footer>
+      </article>
+      <% }) %>
+  </div>
+  <% } else { %>
+    <p>No games found.</p>
+    <% } %>

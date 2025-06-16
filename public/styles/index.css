@@ -1,0 +1,136 @@
+/* Reset */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Segoe UI", sans-serif;
+	background-color: #f4f4f4;
+	color: #333;
+	overflow-y: auto;
+}
+
+body.no-scroll {
+	overflow: hidden;
+}
+
+/* Layout */
+.container {
+	display: flex;
+	min-height: 100vh;
+}
+
+.sidebar {
+	width: 250px;
+	background: #2c3e50;
+	color: white;
+	padding: 20px;
+}
+
+.sidebar h2 {
+	margin-bottom: 1rem;
+}
+
+.sidebar a {
+	color: #ecf0f1;
+	text-decoration: none;
+}
+
+.sidebar ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.sidebar li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid white;
+}
+
+[id^="label-"] {
+	word-break: break-word;
+	max-width: 100%;
+}
+
+.edit-category-form input {
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.edit-delete-buttons {
+	margin: 5px 0;
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+.edit-delete-buttons button {
+	font-size: 1.2rem;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.edit-delete-buttons button:hover {
+	transform: scale(1.2);
+}
+
+.add-category-form {
+	margin-bottom: 10px;
+}
+
+.add-category-form input,
+.add-category-form button {
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+}
+
+.add-category-form button {
+	color: white;
+	background-color: #3498db;
+}
+
+/* Main Content */
+.main-content {
+	flex: 1;
+	padding: 20px;
+	background: white;
+}
+
+.main-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.add-game-btn {
+	padding: 8px 16px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.add-game-btn:hover {
+	background-color: #2980b9;
+}
+
+.games-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1rem;
+	margin-top: 20px;
+}

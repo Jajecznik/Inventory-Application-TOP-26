@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    <%= title %>
+  </title>
+  <script src="/scripts/script.js" defer></script>
+
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/gameCard.css">
+
+  <% if (locals.view==='modal' ) { %>
+    <link rel="stylesheet" href="/styles/createAndUpdateGame.css">
+    <% } %>
+</head>
+
+<body class="<%= locals.showForm || locals.updateGame ? 'no-scroll' : '' %>">
+  <% if (locals.showForm) { %>
+    <%- include('./partials/createGame.ejs') %>
+      <% } %>
+
+        <% if (locals.updateGame && locals.gameToUpdate) { %>
+          <%- include('./partials/updateGame.ejs', { game: gameToUpdate }) %>
+            <% } %>
+
+              <div class="container">
+                <aside class="sidebar">
+                  <h2>Categories</h2>
+
+                  <form action="/" method="POST" class="add-category-form">
+                    <input type="text" id="category_name" name="category_name" placeholder="Add category..." required>
+                    <button type="submit">Add</button>
+                  </form>
+
+                  <% if (locals.categories && locals.categories.length> 0) { %>
+                    <ul>
+                      <li>
+                        <h3><a href="/">All Categories</a></h3>
+                      </li>
+                      <% locals.categories.forEach((category, index)=> { %>
+                        <li>
+                          <span id="label-<%= index %>">
+                            <a href="/category/<%= encodeURIComponent(category.category) %>">
+                              <%= category.category %>
+                            </a>
+                          </span>
+
+                          <div class="edit-delete-buttons">
+                            <span>
+                              <form action="update/<%= encodeURIComponent(category.category) %>" method="POST"
+                                id="form-<%= index %>" class="edit-category-form" style="display: none;">
+                                <input type="text" name="new_category_name" value="<%= category.category %>" required>
+                                <button type="submit">✔️</button>
+                                <button type="button" onclick="toggleEditMode('<%= index %>')">✖️</button>
+                              </form>
+                              <button onclick="toggleEditMode('<%= index %>')" id="edit-btn-<%= index %>">✏️</button>
+                            </span>
+
+                            <span>
+                              <form action="/delete/category/<%= encodeURIComponent(category.category) %>"
+                                method="POST">
+                                <button type="submit" id="delete-btn-<%= index %>">🗑️</button>
+                              </form>
+                            </span>
+                          </div>
+                        </li>
+                        <% }); %>
+                    </ul>
+                    <% } else { %>
+                      <p>No categories found.</p>
+                      <% } %>
+                </aside>
+
+                <main class="main-content">
+                  <div class="main-header">
+                    <h1>
+                      <%= title %>
+                    </h1>
+                    <a href="/?addGame=true">
+                      <button class="add-game-btn">Add New Game</button>
+                    </a>
+                  </div>
+
+                  <%- include('./partials/gameCard.ejs') %>
+                </main>
+              </div>
+</body>
+
+</html>
